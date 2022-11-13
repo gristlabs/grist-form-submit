@@ -1,0 +1,11 @@
+{
+  "name": "grist-form-submit",
+  "version": "0.1.0",
+  "description": "Turn form submissions on webpages into new records in Grist documents",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "author": "Grist Labs",
+  "license": "Apache-2.0"
+}
