@@ -9,6 +9,7 @@ This repo contains tools to make it easy to submit forms as new records added to
 - [Plain HTML forms](#plain-html-forms)
 - [Javascript submit handlers](#javascript-submit-handlers)
 - [WordPress Contact Form 7](#wordpress-contact-form-7)
+- [Troubleshooting](#troubleshooting)
 
 ## Setting up Grist docs
 

@@ -61,7 +61,8 @@ function formDataToJson(f) {
 
 // Handle submissions for plain forms that include special data-grist-* attributes.
 async function handleSubmitPlainForm(ev) {
-  if (['data-grist-doc', 'data-grist-table', 'data-grist-success-url'].every(attr => !ev.target.has(attr))) {
+  if (!['data-grist-doc', 'data-grist-table', 'data-grist-success-url']
+      .some(attr => ev.target.hasAttribute(attr))) {
     // This form isn't configured for Grist at all; don't interfere with it.
     return;
   }
