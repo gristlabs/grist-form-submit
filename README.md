@@ -101,11 +101,11 @@ Somewhere in your page, include the following script snippet:
 <script src="https://gristlabs.github.io/grist-form-submit/grist-form-submit.js"></script>
 ```
 
-This makes available `grist_form_submit()` global function available, which you can use in your
+This makes available `gristFormSubmit()` global function available, which you can use in your
 own Javascript handler:
 
 ```
-grist_form_submit(gristDocUrl, gristTableId, formData)
+gristFormSubmit(gristDocUrl, gristTableId, formData)
 ```
 - `gristDocUrl` should be the URL of the Grist document, from step 1 of the setup instructions.
 - `gristTableId` should be the table ID from step 2.

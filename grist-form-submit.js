@@ -1,9 +1,9 @@
 // If the script is loaded multiple times, only register the handlers once.
-if (!window.grist_form_submit) {
+if (!window.gristFormSubmit) {
   (function() {
 
 /**
- * grist_form_submit(gristDocUrl, gristTableId, formData)
+ * gristFormSubmit(gristDocUrl, gristTableId, formData)
  *  - `gristDocUrl` should be the URL of the Grist document, from step 1 of the setup instructions.
  *  - `gristTableId` should be the table ID from step 2.
  *  - `formData` should be a [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData)
@@ -14,7 +14,7 @@ if (!window.grist_form_submit) {
  * returns a promise for the result of the add-record API call. In case of an error, the promise
  * will be rejected with an error message.
  */
-async function grist_form_submit(docUrl, tableId, formData) {
+async function gristFormSubmit(docUrl, tableId, formData) {
   // Pick out the server and docId from the docUrl.
   const match = /^(https?:\/\/[^\/]+(?:\/o\/[^\/]+)?)\/(?:doc\/([^\/?#]+)|([^\/?#]{12,})\/)/.exec(docUrl);
   if (!match) { throw new Error("Invalid Grist doc URL " + docUrl); }
@@ -77,7 +77,7 @@ async function handleSubmitPlainForm(ev) {
     const successUrl = ev.target.getAttribute('data-grist-success-url');
     if (!successUrl) { throw new Error("Missing attribute data-grist-success-url='REDIRECT_URL'"); }
 
-    await grist_form_submit(docUrl, tableId, new FormData(ev.target));
+    await gristFormSubmit(docUrl, tableId, new FormData(ev.target));
 
     // On success, redirect to the requested URL.
     window.location.href = successUrl;
@@ -107,7 +107,7 @@ async function handleSubmitWPCF7(ev) {
     if (!docUrl) { throw new Error("Missing attribute data-grist-doc='GRIST_DOC_URL'"); }
     if (!tableId) { throw new Error("Missing attribute data-grist-table='GRIST_TABLE_ID'"); }
 
-    await grist_form_submit(docUrl, tableId, new FormData(ev.target));
+    await gristFormSubmit(docUrl, tableId, new FormData(ev.target));
     console.log("grist-form-submit WPCF7 Form %s: Added record", formId);
 
   } catch (err) {
@@ -115,7 +115,7 @@ async function handleSubmitWPCF7(ev) {
   }
 }
 
-window.grist_form_submit = grist_form_submit;
+window.gristFormSubmit = gristFormSubmit;
 document.addEventListener('submit', handleSubmitPlainForm);
 document.addEventListener('wpcf7mailsent', handleSubmitWPCF7);
 
