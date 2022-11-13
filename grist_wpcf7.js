@@ -1,13 +1,11 @@
 /**
+ Script to add Contact Form 7 submissions as new records to a Grist document.
  Usage: Add the following snippet at the end of the CF7 form template:
 
-========================================
-<script src="URL_TO_THIS_SCRIPT"
+<script src="https://gristlabs.github.io/grist-form-submit/grist_wpcf7.js"
   data-grist-doc="GRIST_DOC_URL"
   data-grist-table="GRIST_TABLE_ID"
 ></script>
-========================================
-
  */
 
 async function handleSubmit(ev) {
