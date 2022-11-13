@@ -1,3 +1,7 @@
+// If the script is loaded multiple times, only register the handlers once.
+if (!window.grist_form_submit) {
+  (function() {
+
 /**
  * grist_form_submit(gristDocUrl, gristTableId, formData)
  *  - `gristDocUrl` should be the URL of the Grist document, from step 1 of the setup instructions.
@@ -44,7 +48,19 @@ async function grist_form_submit(docUrl, tableId, formData) {
   return await resp.json();
 }
 
-async function handleSubmit(ev) {
+
+// Convert FormData into a mapping of Grist fields. Skips any keys starting with underscore.
+// For fields with multiple values (such as to populate ChoiceList), use field names like `foo[]`
+// (with the name ending in a pair of empty square brackets).
+function formDataToJson(f) {
+  const keys = Array.from(f.keys()).filter(k => !k.startsWith("_"));
+  return Object.fromEntries(keys.map(k =>
+    k.endsWith('[]') ? [k.slice(0, -2), ['L', ...f.getAll(k)]] : [k, f.get(k)]));
+}
+
+
+// Handle submissions for plain forms that include special data-grist-* attributes.
+async function handleSubmitPlainForm(ev) {
   if (['data-grist-doc', 'data-grist-table', 'data-grist-success-url'].every(attr => !ev.target.has(attr))) {
     // This form isn't configured for Grist at all; don't interfere with it.
     return;
@@ -66,7 +82,7 @@ async function handleSubmit(ev) {
     window.location.href = successUrl;
 
   } catch (err) {
-    console.warn("grist_form_submit error:", err.message);
+    console.warn("grist-form-submit error:", err.message);
     // Find an element to use for the validation message to alert the user.
     let scapegoat = null;
     (
@@ -80,17 +96,27 @@ async function handleSubmit(ev) {
   }
 }
 
-// Convert FormData into a mapping of Grist fields. Skips any keys starting with underscore.
-// For fields with multiple values (such as to populate ChoiceList), use field names like `foo[]`
-// (with the name ending in a pair of empty square brackets).
-function formDataToJson(f) {
-  const keys = Array.from(f.keys()).filter(k => !k.startsWith("_"));
-  return Object.fromEntries(keys.map(k =>
-    k.endsWith('[]') ? [k.slice(0, -2), ['L', ...f.getAll(k)]] : [k, f.get(k)]));
+
+// Handle submissions for Contact Form 7 forms.
+async function handleSubmitWPCF7(ev) {
+  try {
+    const formId = ev.detail.contactFormId;
+    const docUrl = ev.target.querySelector('[data-grist-doc]')?.getAttribute('data-grist-doc');
+    const tableId = ev.target.querySelector('[data-grist-table]')?.getAttribute('data-grist-table');
+    if (!docUrl) { throw new Error("Missing attribute data-grist-doc='GRIST_DOC_URL'"); }
+    if (!tableId) { throw new Error("Missing attribute data-grist-table='GRIST_TABLE_ID'"); }
+
+    await grist_form_submit(docUrl, tableId, new FormData(ev.target));
+    console.log("grist-form-submit WPCF7 Form %s: Added record", formId);
+
+  } catch (err) {
+    console.warn("grist-form-submit WPCF7 Form %s misconfigured:", formId, err.message);
+  }
 }
 
-// If the script is loaded multiple times, only register the handler once.
-if (!window.grist_form_submit_loaded) {
-  window.grist_form_submit_loaded = true;
-  document.addEventListener('submit', handleSubmit);
+window.grist_form_submit = grist_form_submit;
+document.addEventListener('submit', handleSubmitPlainForm);
+document.addEventListener('wpcf7mailsent', handleSubmitWPCF7);
+
+  })();
 }

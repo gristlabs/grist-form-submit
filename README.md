@@ -135,7 +135,7 @@ correspond to Grist column IDs. Step 3 of the instructions above explains it fur
 Now add the following snippet at the end of your Contact Form 7 template:
 
 ```html
-<script src="https://gristlabs.github.io/grist-form-submit/grist_wpcf7.js"
+<script src="https://gristlabs.github.io/grist-form-submit/grist-form-submit.js"
   data-grist-doc="GRIST_DOC_URL"
   data-grist-table="GRIST_TABLE_ID"
 ></script>
