@@ -2,13 +2,21 @@
   "name": "grist-form-submit",
   "version": "0.1.0",
   "description": "Turn form submissions on webpages into new records in Grist documents",
-  "main": "index.js",
+  "main": "grist-form-submit.js",
   "scripts": {
     "test": "MOCHA_WEBDRIVER_HEADLESS=1 mocha test",
     "test-debug": "mocha test -b --no-exit"
   },
   "author": "Grist Labs",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gristlabs/grist-form-submit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gristlabs/grist-form-submit/issues"
+  },
+  "homepage": "https://github.com/gristlabs/grist-form-submit#readme",
   "devDependencies": {
     "@types/chai": "^4.3.4",
     "@types/express": "^4.17.14",
