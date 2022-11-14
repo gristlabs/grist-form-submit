@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="--SCRIPT--"></script>
+    <script>
+      async function onSubmit(ev) {
+        ev.preventDefault();
+        try {
+          await gristFormSubmit(
+            "https://public.getgrist.com/7A9N1vbYTjRo/Fixture-Doc-For-Grist-Form-Submit/p/2",
+            "SignUps",
+            new FormData(ev.target)
+          );
+          const name = ev.target.elements.Name.value;
+          const resp = await fetch(`https://public.getgrist.com/api/docs/7A9N1vbYTjRo/tables/SignUps/records?` +
+            `filter={%22Name%22:[%22${name}%22]}`);
+          document.querySelector('#output').textContent = await resp.text();
+        } catch (e) {
+          document.querySelector('#error').textContent = String(e);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h2>JS Handler Form</h2>
+    <form class="test-form" onsubmit="onSubmit(event)">
+      <div>Name: <input name="Name" type="text" class='test-name' required></div>
+      <div>Year: <input name="Year" type="number" class='test-year'></div>
+      <div>Date: <input name="Date" type="date" class='test-date'></div>
+      <div>Wishes:
+        <div><label class='test-wishes1'>
+            <input name="Wishes[]" type="checkbox" value="Toys,Games"> Toys &amp; Games</label></div>
+        <div><label class='test-wishes2'>
+            <input name="Wishes[]" type="checkbox" value="Peace"> Peace</label></div>
+        <div><label class='test-wishes3'>
+            <input name="Wishes[]" type="checkbox" value="Happiness"> Happiness</label></div>
+      </div>
+      <p><input type="submit" value="Save" class='test-submit'>
+    </form>
+    <div id="output" style="border: 1px solid blue"></div>
+    <div id="error" style="border: 1px solid red"></div>
+  </body>
+</html>
+

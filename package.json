@@ -4,8 +4,20 @@
   "description": "Turn form submissions on webpages into new records in Grist documents",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test"
+    "test": "MOCHA_WEBDRIVER_HEADLESS=1 mocha test",
+    "test-debug": "mocha test -b --no-exit"
   },
   "author": "Grist Labs",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/chai": "^4.3.4",
+    "@types/express": "^4.17.14",
+    "@types/mocha": "^10.0.0",
+    "@types/node": "^18.11.9",
+    "@types/selenium-webdriver": "^4.1.9",
+    "express": "^4.18.2",
+    "mocha-webdriver": "^0.2.11",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
+  }
 }

@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "strict": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "useUnknownInCatchVariables": false,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "declaration": false,
+    "noEmit": true
+  },
+  "include": [
+    "test/"
+  ]
+}

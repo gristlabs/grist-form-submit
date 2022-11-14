@@ -60,7 +60,9 @@ This part of the instructions is the same for all of the methods.
 
       <img src="docs/sample-access-rules.png" alt="Sample Access Rules" width="752">
 
-   4. Now open the Share menu, and click Manage Users.
+      Click "Save" to save the rules.
+
+   4. Now open the Share menu, and click "Manage Users".
       Turn [Public access](https://support.getgrist.com/sharing/#public-access-and-link-sharing)
       to "On", and
       set Public Access role to `Editor`. Your screen should look like this:

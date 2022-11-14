@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="--SCRIPT--"></script>
+  </head>
+  <body>
+    <h2>Plain Form</h2>
+    <form class="test-form"
+      data-grist-doc="https://public.getgrist.com/7A9N1vbYTjRo/Fixture-Doc-For-Grist-Form-Submit/p/2"
+      data-grist-table="SignUps"
+      data-grist-success-url="https://public.getgrist.com/api/docs/7A9N1vbYTjRo/tables/SignUps/records?filter={%22Name%22:[%22--NAME--%22]}"
+      >
+      <div>Name: <input name="Name" type="text" class='test-name'></div>
+      <div>Year: <input name="Year" type="number" class='test-year'></div>
+      <div>Date: <input name="Date" type="date" class='test-date'></div>
+      <div>Wishes:
+        <div><label class='test-wishes1'>
+            <input name="Wishes[]" type="checkbox" value="Toys,Games"> Toys &amp; Games</label></div>
+        <div><label class='test-wishes2'>
+            <input name="Wishes[]" type="checkbox" value="Peace"> Peace</label></div>
+        <div><label class='test-wishes3'>
+            <input name="Wishes[]" type="checkbox" value="Happiness"> Happiness</label></div>
+      </div>
+      <p><input type="submit" value="Save" class='test-submit'>
+    </form>
+  </body>
+</html>
+
