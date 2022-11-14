@@ -26,3 +26,4 @@ jobs:
       - run: npm test
         env:
           MOCHA_WEBDRIVER_LOGDIR: testoutput
+          SELENIUM_BROWSER: chrome
