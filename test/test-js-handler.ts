@@ -1,8 +1,10 @@
-import {assert, driver} from 'mocha-webdriver';
+import {assert, driver, enableDebugCapture} from 'mocha-webdriver';
 import {setAttribute, startServer, waitToPass} from './util';
 
 describe('test-js-handler', function() {
   this.timeout(30000);
+  enableDebugCapture();
+
   let url: string;
   let shutdown = () => {};
 

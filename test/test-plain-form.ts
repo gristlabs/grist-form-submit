@@ -1,8 +1,10 @@
-import {assert, driver, WebElement} from 'mocha-webdriver';
+import {assert, driver, enableDebugCapture, WebElement} from 'mocha-webdriver';
 import {setAttribute, startServer, waitToPass} from './util';
 
 describe('test-plain-form', function() {
   this.timeout(30000);
+  enableDebugCapture();
+
   let url: string;
   let shutdown = () => {};
 
