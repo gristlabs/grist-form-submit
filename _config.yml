@@ -1,0 +1,4 @@
+# This limits what's built automatically by GitHub Pages.
+exclude:
+  - test/
+  - package*
