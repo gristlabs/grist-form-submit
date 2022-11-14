@@ -1,5 +1,7 @@
 # Grist Form Submit
 
+[![Run tests](https://github.com/gristlabs/grist-form-submit/actions/workflows/test.yml/badge.svg)](https://github.com/gristlabs/grist-form-submit/actions/workflows/test.yml)
+
 > Scripts to turn form submissions on webpages into new records in Grist documents.
 
 This repo contains tools to make it easy to submit forms as new records added to
