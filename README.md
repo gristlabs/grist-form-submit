@@ -7,10 +7,11 @@
 This repo contains tools to make it easy to submit forms as new records added to
 [Grist](https://www.getgrist.com) documents.
 
-- [Setting up Grist docs](#setting-up-grist-docs)
-- [Plain HTML forms](#plain-html-forms)
-- [Javascript submit handlers](#javascript-submit-handlers)
-- [WordPress Contact Form 7](#wordpress-contact-form-7)
+- Common setup: [Setting up Grist docs](#setting-up-grist-docs)
+- Form handling methods:
+  - [Plain HTML forms](#plain-html-forms)
+  - [Javascript submit handlers](#javascript-submit-handlers)
+  - [WordPress Contact Form 7](#wordpress-contact-form-7)
 - [Troubleshooting](#troubleshooting)
 
 ## Setting up Grist docs
