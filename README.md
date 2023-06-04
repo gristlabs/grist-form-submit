@@ -52,8 +52,8 @@ This part of the instructions is the same for all of the methods.
    table.
 
    1. Start by creating the Access Rules. Click on `Access Rules` in the left panel.
-   2. In the "Default Rules" section, add a rule with condition `user.Access != OWNER`, and
-      permisison "Deny All" (it should show as all 5 red boxes).
+   2. In the "Special Rules" section, uncheck the box "Allow editors to edit structure".
+      The red warning below the checkbox should disappear.
 
    3. Click "Add Table Rules" and select your table to hold submissions. Keep the default empty
       condition (which means "Everyone"), and click the "Create" permission (`C`) twice to make it green
@@ -63,7 +63,7 @@ This part of the instructions is the same for all of the methods.
 
       <img src="docs/sample-access-rules.png" alt="Sample Access Rules" width="752">
 
-      Click "Save" to save the rules.
+      Remember to click "Save" to save the rules.
 
    4. Now open the Share menu, and click "Manage Users".
       Turn [Public access](https://support.getgrist.com/sharing/#public-access-and-link-sharing)
