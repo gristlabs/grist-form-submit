@@ -62,7 +62,7 @@ This part of the instructions is the same for all of the methods.
 
    3. <a id="default-rules"></a>
       In the "Default Rules" section, add a rule with condition `user.Access != OWNER`, and
-      permisison "Deny All" (it should show as all 4 red boxes).
+      permission "Deny All" (it should show as all 4 red boxes).
 
    4. Click "Add Table Rules" and select your table to hold submissions. Keep the default empty
       condition (which means "Everyone"), and click the "Create" permission (`C`) twice to make it green
