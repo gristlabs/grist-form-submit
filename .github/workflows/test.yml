@@ -21,6 +21,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: "Install a version of Chrome that's supported by mocha-chromedriver"
+        run: |
+          VERSION_STRING="111.0.5563.146-1"
+          wget "https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${VERSION_STRING}_amd64.deb"
+          sudo dpkg -i "google-chrome-stable_${VERSION_STRING}_amd64.deb"
+
       - run: npm install
 
       - run: npm test
