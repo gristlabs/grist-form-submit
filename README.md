@@ -4,6 +4,11 @@
 
 > Scripts to turn form submissions on webpages into new records in Grist documents.
 
+## :warning: Warning
+If you followed the instructions between June and August 2023, they had an omission that gave visitors too much access. Be sure that [this step](#default-rules) is included.
+
+## Summary
+
 This repo contains tools to make it easy to submit forms as new records added to
 [Grist](https://www.getgrist.com) documents.
 
@@ -55,7 +60,11 @@ This part of the instructions is the same for all of the methods.
    2. In the "Special Rules" section, uncheck the box "Allow editors to edit structure".
       The red warning below the checkbox should disappear.
 
-   3. Click "Add Table Rules" and select your table to hold submissions. Keep the default empty
+   3. <a id="default-rules"></a>
+      In the "Default Rules" section, add a rule with condition `user.Access != OWNER`, and
+      permission "Deny All" (it should show as all 4 red boxes).
+
+   4. Click "Add Table Rules" and select your table to hold submissions. Keep the default empty
       condition (which means "Everyone"), and click the "Create" permission (`C`) twice to make it green
       (i.e. allowed).
 
@@ -65,7 +74,7 @@ This part of the instructions is the same for all of the methods.
 
       Remember to click "Save" to save the rules.
 
-   4. Now open the Share menu, and click "Manage Users".
+   5. Now open the Share menu, and click "Manage Users".
       Turn [Public access](https://support.getgrist.com/sharing/#public-access-and-link-sharing)
       to "On", and
       set Public Access role to `Editor`. Your screen should look like this:

@@ -30,7 +30,7 @@
   },
   "overrides": {
     "mocha-webdriver": {
-      "chromedriver": "^113"
+      "chromedriver": "^111"
     }
   }
 }
