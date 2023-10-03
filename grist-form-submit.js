@@ -122,6 +122,7 @@ function setUpGravityForms(options) {
   // Use capture to get the event before GravityForms processes it.
   document.addEventListener('submit', ev => handleSubmitGravityForm(ev, options), true);
 }
+gristFormSubmit.setUpGravityForms = setUpGravityForms;
 
 async function handleSubmitGravityForm(ev, options) {
   try {
