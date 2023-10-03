@@ -83,20 +83,23 @@ async function handleSubmitPlainForm(ev) {
     window.location.href = successUrl;
 
   } catch (err) {
-    console.warn("grist-form-submit error:", err.message);
-    // Find an element to use for the validation message to alert the user.
-    let scapegoat = null;
-    (
-      (scapegoat = ev.submitter)?.setCustomValidity ||
-      (scapegoat = ev.target.querySelector('input[type=submit]'))?.setCustomValidity ||
-      (scapegoat = ev.target.querySelector('button'))?.setCustomValidity ||
-      (scapegoat = [...ev.target.querySelectorAll('input')].pop())?.setCustomValidity
-    )
-    scapegoat?.setCustomValidity("Form misconfigured: " + err.message);
-    ev.target.reportValidity();
+    reportSubmitError(ev, err);
   }
 }
 
+function reportSubmitError(ev, err) {
+  console.warn("grist-form-submit error:", err.message);
+  // Find an element to use for the validation message to alert the user.
+  let scapegoat = null;
+  (
+    (scapegoat = ev.submitter)?.setCustomValidity ||
+    (scapegoat = ev.target.querySelector('input[type=submit]'))?.setCustomValidity ||
+    (scapegoat = ev.target.querySelector('button'))?.setCustomValidity ||
+    (scapegoat = [...ev.target.querySelectorAll('input')].pop())?.setCustomValidity
+  )
+  scapegoat?.setCustomValidity("Form misconfigured: " + err.message);
+  ev.target.reportValidity();
+}
 
 // Handle submissions for Contact Form 7 forms.
 async function handleSubmitWPCF7(ev) {
@@ -112,6 +115,47 @@ async function handleSubmitWPCF7(ev) {
 
   } catch (err) {
     console.warn("grist-form-submit WPCF7 Form %s misconfigured:", formId, err.message);
+  }
+}
+
+function setUpGravityForms(options) {
+  // Use capture to get the event before GravityForms processes it.
+  document.addEventListener('submit', ev => handleSubmitGravityForm(ev, options), true);
+}
+
+async function handleSubmitGravityForm(ev, options) {
+  try {
+    ev.preventDefault();
+    ev.stopPropagation();
+
+    const docUrl = options.docUrl;
+    const tableId = options.tableId;
+    if (!docUrl) { throw new Error("setUpGravityForm: missing docUrl option"); }
+    if (!tableId) { throw new Error("setUpGravityForm: missing tableId option"); }
+
+    const f = new FormData(ev.target);
+    for (const key of Array.from(f.keys())) {
+      // Skip fields other than input fields.
+      if (!key.startsWith("input_")) {
+        f.delete(key);
+        continue;
+      }
+      // Rename multiple fields to use "[]" convention rather than ".N" convention.
+      const multi = key.split(".");
+      if (multi.length > 1) {
+        f.append(multi[0] + "[]", f.get(key));
+        f.delete(key);
+      }
+    }
+    console.warn("Processed FormData", f);
+    await gristFormSubmit(docUrl, tableId, f);
+
+    // Follow through by doing the form submission normally.
+    ev.target.submit();
+
+  } catch (err) {
+    reportSubmitError(ev, err);
+    return;
   }
 }
 
